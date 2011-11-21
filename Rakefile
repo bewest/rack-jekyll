@@ -1,7 +1,9 @@
 require 'rubygems/specification'
 require 'rubygems/package_task'
 require 'rake/testtask'
-require_relative 'lib/rack/jekyll'
+
+$:.unshift File.join(File.dirname(__FILE__), "lib")
+require "reni"
 
 task :default => :test
 
@@ -14,17 +16,17 @@ end
 
 desc "Build gem"
 task :build do
-  sh "gem build rack-jekyll.gemspec"
+  sh "gem build reni.gemspec"
 end
 
 desc "Install gem"
 task :install do
-  sh "sudo gem install rack-jekyll-#{Rack::Jekyll.version}.gem"
+  sh "sudo gem install reni-#{Reni::VERSION}.gem"
 end
 
 desc "Push to Gemcutter"
 task :push do
-  sh "gem push rack-jekyll-#{Rack::Jekyll.version}.gem"
+  sh "gem push reni-#{Reni::VERSION}.gem"
 end
 
 desc "Clean up gem"
